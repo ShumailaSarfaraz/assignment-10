@@ -1,101 +1,84 @@
-import Image from "next/image";
+import ProductCard from './components/ProductCard'
+
+const products = [
+  {
+    name: "Wireless Headphones",
+    price: 299,
+    oldPrice: 399,
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
+    description: "Premium noise-canceling headphones of your choice"
+  },
+  {
+    name: "Smart Watch",
+    price: 199,
+    oldPrice: 299,
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80",
+    description: "Next-gen smartwatch with health tracking"
+  },
+  {
+    name: "Premium Camera",
+    price: 899,
+    oldPrice: 999,
+    image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&q=80",
+    description: "Professional DSLR camera to capture your beautiful moments"
+  },
+  {
+    name: "Running Shoes",
+    price: 129,
+    oldPrice: 159,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+    description: "Lightweight performance running shoes for your morning jog"
+  },
+  {
+    name: "Sunglasses",
+    price: 159,
+    oldPrice: 199,
+    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80",
+    description: "Classic aviator sunglasses to use in your summer vacations"
+  },
+  {
+    name: "Backpack",
+    price: 79,
+    oldPrice: 99,
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80",
+    description: "Durable everyday backpack to keep your things safe in rainy days"
+  }
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer">
+              <div className="relative">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-64 object-cover"
+                />
+                <span className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  NEW
+                </span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
+                <p className="text-gray-500 mb-4">{product.description}</p>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+                    <span className="text-sm text-gray-500 line-through ml-2">${product.oldPrice}</span>
+                  </div>
+                  <button className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </div>
+    </main>
+  )
 }
